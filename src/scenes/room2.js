@@ -1,1 +1,1 @@
-export function room2() {}
+export async function room2() {}

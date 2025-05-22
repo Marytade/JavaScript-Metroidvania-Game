@@ -7,12 +7,12 @@ async function main() {
   const room2Data = await (await fetch("./maps/room2.json")).json();
 
   k.scene("room1", () => {
-    room1(k, room1Data,);
-  });
+    room1(k, room1Data);
+   });
 
-  k.scene("room2", () => {
+   k.scene("room2", () => {
     room2();
-  });
+   });
 }
 
 main();
@@ -20,11 +20,7 @@ main();
 k.scene("intro", () => {
   k.onKeyPress("enter", () => {
     k.go("room1");
-  })
-})
+  });
+});
 
 k.go("intro");
- 
-
-
-
