@@ -31,7 +31,7 @@ k.scene("intro", () => {
     // makes audio will be enabled before the game starts
     const context = new AudioContext();
     context.resume();
-    k.go("room1", {exitName: null});
+    k.go("room1", { exitName: null });
   });
 });
 
