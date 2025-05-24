@@ -2,7 +2,10 @@
 # #✨🪽 Light of Heaven – Demo
 
 
-🎮 JavaScript-Metroidvania Game Get a taste of Light of Heaven, a retro-inspired Metroidvania adventure where betrayal burns brighter than the stars.
+🎮 A retro-inspired Metroidvania adventure game built with JavaScript.
+
+<img width="1512" alt="Screenshot 2025-05-24 at 12 28 21 AM" src="https://github.com/user-attachments/assets/5a806ed8-8e36-4da0-9e34-7dba002b8f6f" />
+
 
 
 In this early demo, you step into the role of Seraphine, a fallen angel with no memory and a bleeding wing. Guided by a suspiciously charming axolotl named Makio, you must navigate a broken world, uncover lost powers, and reclaim the Six Heavenly Virtues to return to the skies above. But not everything is what it seems...
