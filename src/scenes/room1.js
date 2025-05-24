@@ -56,7 +56,7 @@ export function room1(k, roomData, previousSceneData) {
   setExitZones(k, map, exits, "room2");
 
   for (const position of positions) {
-    if (position.name === "player" && !previousSceneData.setExitZones) {
+    if (position.name === "player" && !previousSceneData?.setExitZones) {
       player.setPosition(position.x, position.y);
       player.setControls();
       player.setEvents();
@@ -68,7 +68,7 @@ export function room1(k, roomData, previousSceneData) {
 
     if (
       position. name === "entrance-1" &&
-      previousSceneData.exitName === "exit-1"
+      previousSceneData?.exitName === "exit-1"
     ) {
       player. setPosition (position.x, position.y);
       player. setControls();
@@ -81,7 +81,7 @@ export function room1(k, roomData, previousSceneData) {
 
     if (
       position.name === "entrance-2" &&
-      previousSceneData.exitName === "exit-2"
+      previousSceneData?.exitName === "exit-2"
     ) {
       player.setPosition(position.x, position.y);
       player.setControls();
