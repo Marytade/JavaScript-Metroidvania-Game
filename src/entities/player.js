@@ -1,13 +1,15 @@
-import { state } from "../state/globalStateManager.js" ;
+import { state, statePropsEnum} from "../state/globalStateManager.js" ;
+import { healthBar } from "../ui/healthBar.js";
+import { makeBlink } from "./entitySharedLogic.js";
 
 export function makePlayer(k) {
     return k.make([ 
         k.pos(),
         k.sprite("player"),
         k.area({
-            shape: new k.Rect(k. vec2(0, 18), 12, 12),
+            shape: new k.Rect(k. vec2(0, 10), 12, 12),
         }),
-        k.anchor ("top"),
+        k.anchor ("center"),
         k.body ({ mass: 100, jumpForce: 320 }),
         k.doubleJump(state.current().isDoubleJumpUnlocked ? 2 : 1),
         k.opacity(),
@@ -100,6 +102,23 @@ export function makePlayer(k) {
                   })
                 );
             },
+            disableControls () {
+              for (const handler of this.controlHandlers) {
+                handler.cancel();
+              }
+            },
+
+            respawnIfOutOfBounds(
+              boundValue,
+              destinationName,
+              previousSceneData = { exitName: null } 
+            ) {
+              k.onUpdate(() => {
+                if (this.pos.y > boundValue) {
+                  k.go(destinationName, previousSceneData);
+                }
+              });
+            },
             setEvents() {
               this.onFall(() => {
                 this.play("fall");
@@ -115,8 +134,35 @@ export function makePlayer(k) {
 
               this.onHeadbutt(() => {
                 this.play("fall");
-              })
-            },
+              });
+
+              this.on("heal", () => {
+                state.set(statePropsEnum.playerHp, this.hp());
+                healthBar.trigger("update");
+              });
+
+              this.on("hurt", () => {
+                makeBlink(k, this);
+                if (this.hp() > 0) {
+                  state.set(statePropsEnum.playerHp, this.hp());
+                  healthBar.trigger("update");
+                  return;
+                }
+                
+                k.play("boom");
+                this.play("explode");
+                state.set(statePropsEnum.playerHp, state.current().maxPlayerHp);
+              });
+
+              this.onAnimEnd((anim) => {
+                if (anim === "explode") {
+                  k.go("room1");
+                }
+            });
+          },
+          enableDoubleJump() {
+            this.numJumps = 2;
+          },
         },
     ]);
 }

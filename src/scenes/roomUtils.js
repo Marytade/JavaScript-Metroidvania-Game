@@ -104,7 +104,6 @@ export function setMapColliders(k, map, colliders) {
           return;
 
         state.set(statePropsEnum.playerInBossFight, true);
-
         bossBarrier.activate();
         bossBarrier.use(k.body({ isStatic: true }));
       });
